@@ -1,0 +1,31 @@
+name: Minimal Test
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: List files
+        run: |
+          echo "Repository contents:"
+          ls -la
+          echo "Force-app contents:"
+          ls -la force-app/ || echo "No force-app directory"
+      
+      - name: Test Node.js
+        run: |
+          echo "Node version: $(node --version)"
+          echo "NPM version: $(npm --version)"
+      
+      - name: Test basic commands
+        run: |
+          echo "Testing basic commands..."
+          pwd
+          whoami
+          echo "Basic commands work!"
