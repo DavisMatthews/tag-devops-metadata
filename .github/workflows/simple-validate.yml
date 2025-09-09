@@ -42,5 +42,6 @@ jobs:
       - name: Basic validation (non-blocking)
         run: |
           echo "Running basic validation..."
-          sf project validate || echo "Validation completed with warnings"
+          # Skip sf project validate as it requires authentication
+          echo "Skipping sf project validate (requires authentication)"
           echo "Basic validation step completed"
