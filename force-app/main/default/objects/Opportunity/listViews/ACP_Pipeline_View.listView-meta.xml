@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ACP_Pipeline_View</fullName>
+    <booleanFilter>2 AND 4 AND (1 OR 3)</booleanFilter>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>TAG_Account_Annual_Revenue__c</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>TAG_Stage_Detail__c</columns>
+    <columns>TAG_Project__c</columns>
+    <columns>TAG_Conference_Call__c</columns>
+    <columns>OPPORTUNITY.NEXT_STEP</columns>
+    <columns>OPPORTUNITY.LAST_ACTIVITY</columns>
+    <columns>CORE.USERS.FULL_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>TAG_Stage_Detail__c</field>
+        <operation>equals</operation>
+        <value>Contact Made - Interest Unknown,Custom Approach</value>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Opportunity.TAG_Target_Company</value>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.STAGE_NAME</field>
+        <operation>equals</operation>
+        <value>Introduction,Advanced Lead,In Discussions,Proposal,Negotiation,Offer &amp; Better</value>
+    </filters>
+    <filters>
+        <field>TAG_Project_ID__c</field>
+        <operation>equals</operation>
+        <value>a15an000007Hv4fAAC</value>
+    </filters>
+    <label>ACP - Pipeline View</label>
+    <sharedTo>
+        <group>Cade_Group</group>
+        <group>Sebastian_Group</group>
+        <group>Vince_Group</group>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,135 @@
+<apex:page standardController="Opportunity"
+    recordSetVar="sobjects"
+    extensions="PDFB_ListConvertorController,OppDocConfigResolver"
+    standardStylesheets="false"
+    sidebar="false">
+
+    <apex:slds />
+
+    <!-- Embed JSON for JS -->
+    <apex:outputText id="jsonRecordIds" value="{!recordIdsJSON}" escape="false" style="display:none;" />
+    <apex:outputText id="jsonDocMap"    value="{!docConfigByOppJSON}" escape="false" style="display:none;" />
+
+    <script type="text/javascript">
+    var recordIds = {!recordIdsJSON};
+    var docConfigByOpp = {!docConfigByOppJSON};
+
+    // Optional params if you use them
+    var alternativeName = null;
+    var locale = null;
+    var packId = null;
+
+    var maxval = recordIds.length;
+    var curval = 0;
+
+    document.onreadystatechange = function() {
+        if (document.readyState === 'complete') {
+            document.getElementById("myProgressBar").setAttribute("aria-valuemax", maxval);
+            document.getElementById("nrOfDocs").innerText = maxval;
+            document.getElementById("allDone").style.display = "none";
+            start();
+        }
+    };
+
+    async function start () {
+        for (var recordId of recordIds) {
+            await doConvert(recordId);
+            curval++;
+            document.getElementById("myProgressBar").setAttribute("aria-valuenow", curval);
+            document.getElementById("myProgressBarWidth").style.width = (curval / maxval) * 100 + '%';
+        }
+        document.getElementById("allDone").style.display = "block";
+    }
+
+    // Uses package remote action
+    function doConvert(recordId) {
+        return new Promise(resolve => {
+            var docConfigId = (docConfigByOpp && docConfigByOpp[recordId]) ? docConfigByOpp[recordId] : null;
+
+            if (!docConfigId) {
+                var err = 'No Doc Config Id on Project for Opportunity ' + recordId + ' (via Approval List).';
+                var errBox = document.getElementById("responseErrors");
+                errBox.innerHTML += (errBox.innerHTML ? '<br/>' : '') + err;
+                resolve();
+                return;
+            }
+
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.PDFB_ListConvertorController.doConvert}',
+                docConfigId,
+                recordId,
+                locale,
+                alternativeName,
+                packId,
+                function(result, event) {
+                    if (event.status) {
+                        var docConfigData = JSON.parse(result);
+
+                        // Download to browser (mirrors package behavior)
+                        var dlnk = document.getElementById('fileDownload');
+                        dlnk.href = "data:application/octet-stream;base64," + docConfigData.base64;
+                        dlnk.download = docConfigData.title;
+                        dlnk.click();
+
+                        var x = document.getElementById("genDocsTitles");
+                        var newLI = document.createElement("li");
+                        newLI.appendChild(document.createTextNode(docConfigData.title));
+                        x.appendChild(newLI);
+
+                    } else if (event.type === 'exception') {
+                        document.getElementById("responseErrors").innerHTML +=
+                            (document.getElementById("responseErrors").innerHTML ? '<br/>' : '') +
+                            event.message + "<br/>\n<pre>" + event.where + "</pre>";
+                    } else {
+                        document.getElementById("responseErrors").innerHTML +=
+                            (document.getElementById("responseErrors").innerHTML ? '<br/>' : '') +
+                            (event.message || 'Unknown error.');
+                    }
+                    resolve();
+                },
+                { escape: false }
+            );
+        });
+    }
+    </script>
+
+    <br/><br/><br/><br/><br/><br/>
+
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-account" title="account">
+                        <span class="slds-assistive-text">account</span>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span>Total nr of documents to generate: </span><span id="nrOfDocs"></span>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">
+            <div id="myProgressBar" class="slds-progress-bar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" role="progressbar">
+                <span class="slds-progress-bar__value" style="width:0%" id="myProgressBarWidth">
+                    <span class="slds-assistive-text">Progress: %</span>
+                </span>
+            </div>
+            <br/>
+            Starting...
+            <ol class="slds-list_ordered" id="genDocsTitles"></ol>
+            <br/><br/>
+            <div id="allDone" style="display:none;">
+                ...All Done, click "Go Back" below to return to the list view
+            </div>
+            <div id="responseErrors" style="color:#b71c1c;margin-top:1rem;"></div>
+        </div>
+        <footer class="slds-card__footer">
+            <button type="button" onclick="history.back();">Go Back</button>
+            <!-- <apex:outputLink value="{!originalUrl}">Go Back</apex:outputLink> -->
+        </footer>
+    </article>
+
+    <a name="fileDownload" id="fileDownload" download="" target="_blank"></a>
+</apex:page>

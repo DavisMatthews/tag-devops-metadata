@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TAG_Buyer</fullName>
+    <active>true</active>
+    <businessProcess>TAG_Buyer</businessProcess>
+    <description>Client/Buyer</description>
+    <label>Buyer</label>
+    <picklistValues>
+        <picklist>ForecastCategoryName</picklist>
+        <values>
+            <fullName>Best Case</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Commit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Omitted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pipeline</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>LeadSource</picklist>
+        <values>
+            <fullName>Advertisement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer Event</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Employee Referral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>External Referral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Google AdWords</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purchased List</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trade Show</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Webinar</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Website</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TAG_Loss_Reason_Detail__c</picklist>
+        <values>
+            <fullName>End-Markets %26 Customers Related</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financial  %28size%2C growth%2C profitability%2C etc%2E%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financial Related</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Reason Provided</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Response to Outreach Cycles</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Products %26 Services Related</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Succession Plan in Place</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Target Backed by PE or Other Investor Type</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Timing %28Long Term Prospect%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TAG_Peak_Stage_Detail__c</picklist>
+        <values>
+            <fullName>Approved Ready for Outreach</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Client Excluded</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Client No Interest</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Conference Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contact Made - Interest Unknown</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Custom Approach</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deal Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financial Due Diligence %2F QoE Complete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>First Cycle Approach</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In Progress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOI Executed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Notes Shared for Client Review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ongoing Discussions - Progressing Towards an Offer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purchase Agreement Signed %2F Finalizing Deal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ready for External Review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ready for Internal Review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Research Needed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Second Cycle Approach</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sent for Client Approval</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TAG Conversation with Target</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Target No Interest</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verbal Offer Submitted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Visit %2F In-Person Meeting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Written Offer Submitted</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TAG_Peak_Stage__c</picklist>
+        <values>
+            <fullName>Advanced Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed Lost</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed Won</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Introduction</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Negotiation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Interest</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Offer %26 Better</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Proposal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Qualification</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Research</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Target Outreach</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TAG_Priority__c</picklist>
+        <values>
+            <fullName>1 - Critical</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2 - High</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3 - Medium</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4 - Low</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TAG_Stage_Automation__c</picklist>
+        <values>
+            <fullName>Approved Ready for Outreach</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Client Excluded</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>First Cycle Approach</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TAG_Stage_Detail__c</picklist>
+        <values>
+            <fullName>Approved Ready for Outreach</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Client Excluded</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Client No Interest</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Conference Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contact Made - Interest Unknown</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Custom Approach</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deal Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financial Due Diligence %2F QoE Complete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>First Cycle Approach</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In Progress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOI Executed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lost Detail</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Notes Shared for Client Review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ongoing Discussions - Progressing Towards an Offer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purchase Agreement Signed %2F Finalizing Deal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ready for External Review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ready for Internal Review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Research Needed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Second Cycle Approach</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sent for Client Approval</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TAG Conversation with Target</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Target No Interest</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verbal Offer Submitted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Visit %2F In-Person Meeting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Written Offer Submitted</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type</picklist>
+        <values>
+            <fullName>Existing Business</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Business</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>
