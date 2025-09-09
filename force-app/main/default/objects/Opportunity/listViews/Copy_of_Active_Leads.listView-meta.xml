@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Copy_of_Active_Leads</fullName>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>TAG_Stage_Detail__c</columns>
+    <columns>OPPORTUNITY.NEXT_STEP</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OPPORTUNITY.STAGE_NAME</field>
+        <operation>equals</operation>
+        <value>Introduction,Advanced Lead,Offer &amp; Better</value>
+    </filters>
+    <label>LM active leads</label>
+</ListView>
