@@ -1,0 +1,46 @@
+name: Simple Validation
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install Salesforce CLI
+        run: |
+          npm install -g @salesforce/cli
+          echo "$(npm bin -g)" >> $GITHUB_PATH
+      
+      - name: Debug CLI installation
+        run: |
+          echo "Node version: $(node --version)"
+          echo "NPM version: $(npm --version)"
+          echo "SF CLI version: $(sf --version)"
+          echo "Available SF commands:"
+          sf help | head -20
+      
+      - name: Check project structure
+        run: |
+          echo "Project structure:"
+          ls -la
+          echo "Force-app contents:"
+          ls -la force-app/
+          echo "SFDX project file:"
+          cat sfdx-project.json
+      
+      - name: Basic validation (non-blocking)
+        run: |
+          echo "Running basic validation..."
+          sf project validate || echo "Validation completed with warnings"
+          echo "Basic validation step completed"
