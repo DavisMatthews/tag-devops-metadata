@@ -1,0 +1,36 @@
+name: Test Workflow
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: List files
+        run: |
+          echo "Repository contents:"
+          ls -la
+          echo "Force-app contents:"
+          ls -la force-app/ || echo "No force-app directory"
+          echo "SFDX project file:"
+          cat sfdx-project.json || echo "No sfdx-project.json found"
+      
+      - name: Test Node.js
+        run: |
+          echo "Node version: $(node --version)"
+          echo "NPM version: $(npm --version)"
+      
+      - name: Install Salesforce CLI
+        run: |
+          npm install -g @salesforce/cli
+          echo "$(npm bin -g)" >> $GITHUB_PATH
+      
+      - name: Test Salesforce CLI
+        run: |
+          sf --version
+          echo "SF CLI installed successfully"
