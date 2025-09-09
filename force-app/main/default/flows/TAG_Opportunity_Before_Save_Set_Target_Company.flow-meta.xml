@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>Sets the hidden Target Company field when the Account is set or updated on a Target Company Opportunity.  This is so a Buyer Account can directly see related Target Companies.</description>
+    <environments>Default</environments>
+    <interviewLabel>Opportunity - Before Save - Set Target Company {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Opportunity - Before Save - Set Target Company</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Sets that hidden target company field to the Opportunity.Account field.</description>
+        <name>Set_Target_Company</name>
+        <label>Set Target Company</label>
+        <locationX>176</locationX>
+        <locationY>287</locationY>
+        <inputAssignments>
+            <field>TAG_Target_Company__c</field>
+            <value>
+                <elementReference>$Record.AccountId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Set_Target_Company</targetReference>
+        </connector>
+        <filterFormula>AND(
+{!$Setup.CRMF_Automation_Settings__c.CRMF_FlowsEnabled__c} = TRUE,
+{!$Record.RecordType.DeveloperName} = &quot;TAG_Target_Company&quot;,
+OR(
+ISNEW(),
+ISCHANGED({!$Record.AccountId})
+)
+)</filterFormula>
+        <object>Opportunity</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

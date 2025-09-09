@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <description>Checks the value of the Lead Type field and sends the flow down different paths based on the value.</description>
+        <name>Check_Lead_Type</name>
+        <label>Check Lead Type</label>
+        <locationX>314</locationX>
+        <locationY>395</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Buyer</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Lead_Type.TAG_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Buyer</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Buyer_Record_Type_ID</targetReference>
+            </connector>
+            <label>Buyer</label>
+        </rules>
+        <rules>
+            <name>Target_Company</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Lead_Type.TAG_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Target Company</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Target_Company_Record_Type_ID</targetReference>
+            </connector>
+            <label>Target Company</label>
+        </rules>
+    </decisions>
+    <description>Updates the Opportunity record type based on the Lead Type field from the converted Opportunity.  During the Lead Conversion process, the Opportunity Record Type selection is kinda &quot;hidden&quot; so this solution makes selecting that type more prominent in the process.</description>
+    <environments>Default</environments>
+    <interviewLabel>Opportunity - Before Save - Set Record Type {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Opportunity - Before Save - Set Record Type</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Queries the Record Type object for the Buyer Record Type ID.</description>
+        <name>Get_Buyer_Record_Type_ID</name>
+        <label>Get Buyer Record Type ID</label>
+        <locationX>50</locationX>
+        <locationY>503</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_Record_Type_Buyer</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>TAG_Buyer</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>RecordType</object>
+        <queriedFields>Id</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Queries the Lead object for the lead record this converted opportunity came from an obtains the value of the lead type field.</description>
+        <name>Get_Lead_Type</name>
+        <label>Get Lead Type</label>
+        <locationX>314</locationX>
+        <locationY>287</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Lead_Type</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>TAG_Lead_ID__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.TAG_Lead_ID__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Lead</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>TAG_Type__c</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Queries the Record Type object for the Target Company Record Type ID.</description>
+        <name>Get_Target_Company_Record_Type_ID</name>
+        <label>Get Target Company Record Type ID</label>
+        <locationX>314</locationX>
+        <locationY>503</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_Record_Type_Target_Company</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>TAG_Target_Company</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>RecordType</object>
+        <queriedFields>Id</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Sets the Opportunity Record Type to Buyer.</description>
+        <name>Set_Record_Type_Buyer</name>
+        <label>Set Record Type Buyer</label>
+        <locationX>50</locationX>
+        <locationY>611</locationY>
+        <inputAssignments>
+            <field>RecordTypeId</field>
+            <value>
+                <elementReference>Get_Buyer_Record_Type_ID.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Sets the Opportunity Record Type to Target Company.</description>
+        <name>Set_Record_Type_Target_Company</name>
+        <label>Set Record Type Target Company</label>
+        <locationX>314</locationX>
+        <locationY>611</locationY>
+        <inputAssignments>
+            <field>RecordTypeId</field>
+            <value>
+                <elementReference>Get_Target_Company_Record_Type_ID.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Lead_Type</targetReference>
+        </connector>
+        <filterFormula>AND(
+{!$Setup.CRMF_Automation_Settings__c.CRMF_FlowsEnabled__c} = TRUE,
+NOT ISBLANK({!$Record.TAG_Lead_ID__c})
+)</filterFormula>
+        <object>Opportunity</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

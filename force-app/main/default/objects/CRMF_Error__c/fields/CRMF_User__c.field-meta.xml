@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CRMF_User__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The user that launched the flow that created this error record.</description>
+    <inlineHelpText>The user that launched the flow that created this error record.</inlineHelpText>
+    <label>User</label>
+    <referenceTo>User</referenceTo>
+    <relationshipName>Errors</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

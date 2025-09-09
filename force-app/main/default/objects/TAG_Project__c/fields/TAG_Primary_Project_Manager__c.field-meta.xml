@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TAG_Primary_Project_Manager__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>This field is used to denote what Tremila user is the primary project manager for this project record.</description>
+    <label>Primary Project Manager</label>
+    <referenceTo>User</referenceTo>
+    <relationshipName>Projects1</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

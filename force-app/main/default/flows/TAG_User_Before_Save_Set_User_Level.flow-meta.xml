@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <description>Evaluates the profile of the triggering user</description>
+        <name>User_Profile</name>
+        <label>User Profile?</label>
+        <locationX>314</locationX>
+        <locationY>287</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Tremila_Standard_User</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Profile.Name</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Tremila Standard User</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record__Prior.Profile.Name</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Tremila Standard User</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_User_Level_to_Standard</targetReference>
+            </connector>
+            <label>Tremila Standard User</label>
+        </rules>
+        <rules>
+            <name>System_Administrator</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Profile.Name</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>System Administrator</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record__Prior.Profile.Name</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>System Administrator</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_User_Level_to_System_Administrator</targetReference>
+            </connector>
+            <label>System Administrator</label>
+        </rules>
+    </decisions>
+    <description>Updates the User Level depending on the User&apos;s profile - Tremila Standard or System Admin.</description>
+    <environments>Default</environments>
+    <interviewLabel>User - Before Save - {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>User - Before Save - Set User Level</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Set the User Level to Standard</description>
+        <name>Set_User_Level_to_Standard</name>
+        <label>Set User Level to Standard</label>
+        <locationX>50</locationX>
+        <locationY>395</locationY>
+        <inputAssignments>
+            <field>TAG_User_Level__c</field>
+            <value>
+                <stringValue>Standard</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Set the User Level to System Administrator</description>
+        <name>Set_User_Level_to_System_Administrator</name>
+        <label>Set User Level to System Administrator</label>
+        <locationX>314</locationX>
+        <locationY>395</locationY>
+        <inputAssignments>
+            <field>TAG_User_Level__c</field>
+            <value>
+                <stringValue>System Administrator</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>User_Profile</targetReference>
+        </connector>
+        <filterFormula>AND({!$Setup.CRMF_Automation_Settings__c.CRMF_FlowsEnabled__c} = TRUE, 
+OR( 
+ISNEW(),
+ ISCHANGED({!$Record.ProfileId})), 
+OR( {!$Record.Profile.Name} = &quot;Tremila Standard User&quot;, {!$Record.Profile.Name} = &quot;System Administrator&quot; ))</filterFormula>
+        <object>User</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

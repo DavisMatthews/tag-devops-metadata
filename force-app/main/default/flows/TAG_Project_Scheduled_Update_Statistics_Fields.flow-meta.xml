@@ -1,0 +1,1050 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Assigns the Approached field with the record count from the Count Approached query.</description>
+        <name>Assign_Approached</name>
+        <label>Assign Approached</label>
+        <locationX>50</locationX>
+        <locationY>576</locationY>
+        <assignmentItems>
+            <assignToReference>varApproached</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>Count_Approached</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Approached</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the Excluded field with the record count from the Count Excluded query.</description>
+        <name>Assign_Excluded</name>
+        <label>Assign Excluded</label>
+        <locationX>50</locationX>
+        <locationY>900</locationY>
+        <assignmentItems>
+            <assignToReference>varExcluded</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>Count_Excluded</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Excluded</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the Leads Generated field with the record count from the Count Leads Generated query.</description>
+        <name>Assign_Leads_Generated</name>
+        <label>Assign Leads Generated</label>
+        <locationX>50</locationX>
+        <locationY>1872</locationY>
+        <assignmentItems>
+            <assignToReference>varLeadsGenerated</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>Count_Leads_Generated</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Leads_Generated</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the LOI&apos;s Executed field with the record count from the Count LOI&apos;s Executed query.</description>
+        <name>Assign_LOIs_Executed</name>
+        <label>Assign LOI&apos;s Executed</label>
+        <locationX>50</locationX>
+        <locationY>2196</locationY>
+        <assignmentItems>
+            <assignToReference>varLOIExecuted</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>Count_LOIs_Executed</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_LOI_s_Executed</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the NDAs Executed field with the record count from the Count NDA Executed query.</description>
+        <name>Assign_NDA_Executed</name>
+        <label>Assign NDA Executed</label>
+        <locationX>50</locationX>
+        <locationY>1224</locationY>
+        <assignmentItems>
+            <assignToReference>varNDAExecuted</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>Count_NDA_Executed</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_NDAs_Executed</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the Offers Submitted field with the record count from the Count Offers Submitted query.</description>
+        <name>Assign_Offers_Submitted</name>
+        <label>Assign Offers Submitted</label>
+        <locationX>50</locationX>
+        <locationY>2520</locationY>
+        <assignmentItems>
+            <assignToReference>varOffersSubmitted</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>Count_Offers_Submitted</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Offers_Submitted</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the Successfully Contact field with the record count from the Count Successfully Contacted query.</description>
+        <name>Assign_Successfully_Contacted</name>
+        <label>Assign Successfully Contacted</label>
+        <locationX>50</locationX>
+        <locationY>2844</locationY>
+        <assignmentItems>
+            <assignToReference>varSuccessfullyContacted</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>Count_Successfully_Contacted</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Successfully_Contacted</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the Total Target Opportunities field with the record count from the Count Total Target Opportunities query.</description>
+        <name>Assign_Total_Target_Opportunities</name>
+        <label>Assign Total Target Opportunities</label>
+        <locationX>50</locationX>
+        <locationY>3168</locationY>
+        <assignmentItems>
+            <assignToReference>varTotalTargetCompanies</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>Count_Total_Target_Opportunities</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Total_Target_Companies</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the Visit/In-Person field with the record count from the Count Visit/In-Person Meetings query.</description>
+        <name>Assign_Visit_In_Person_Meetings</name>
+        <label>Assign Visit/In-Person Meetings</label>
+        <locationX>50</locationX>
+        <locationY>3492</locationY>
+        <assignmentItems>
+            <assignToReference>varVisitInPersonMeetings</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>Count_Visit_InPerson_Meetings</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Visit_In_Person_Meetings</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the Conference Calls field with the record count from the Count Conference Calls query.</description>
+        <name>AssignConferenceCalls</name>
+        <label>Assign Conference Calls</label>
+        <locationX>50</locationX>
+        <locationY>1548</locationY>
+        <assignmentItems>
+            <assignToReference>varConferenceCalls</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>Count_Conference_Calls</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Conference_Calls</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>This decision node checks the Automation Settings.Flows Enabled custom setting field to see if flows are enabled or not.</description>
+        <name>Check_Automation_Settings</name>
+        <label>Check Automation Settings</label>
+        <locationX>182</locationX>
+        <locationY>252</locationY>
+        <defaultConnectorLabel>Flows Disabled</defaultConnectorLabel>
+        <rules>
+            <name>Flows_Enabled</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Setup.CRMF_Automation_Settings__c.CRMF_FlowsEnabled__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Target_Company_Record_Type_ID</targetReference>
+            </connector>
+            <label>Flows Enabled</label>
+        </rules>
+    </decisions>
+    <description>This flow runs daily and updates the statistics fields on a project record.</description>
+    <environments>Default</environments>
+    <interviewLabel>Project - Scheduled - Update Statistics Fields {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Project - Scheduled - Update Statistics Fields</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Queries the opportunities object for Target Company opportunities related to this project where peak stage = Target Outreach or Higher.</description>
+        <name>Count_Approached</name>
+        <label>Count Approached</label>
+        <locationX>50</locationX>
+        <locationY>468</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_Approached</targetReference>
+        </connector>
+        <filterLogic>1 AND 2 AND (3 OR 4 OR 5 OR 6 OR 7 OR 8 OR 9 OR 10)</filterLogic>
+        <filters>
+            <field>TAG_Project_ID__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varTargetCompanyOpportunityRecordTypeID</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Target Outreach</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Introduction</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Advanced Lead</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Offer &amp; Better</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Qualification</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Proposal</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Negotiation</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Closed Won</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Opportunity</object>
+        <queriedFields>Id</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Queries the opportunities object for Target Company opportunities related to this project where Conference Call is not null</description>
+        <name>Count_Conference_Calls</name>
+        <label>Count Conference Calls</label>
+        <locationX>50</locationX>
+        <locationY>1440</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>AssignConferenceCalls</targetReference>
+        </connector>
+        <filterLogic>1 AND 2 AND 3</filterLogic>
+        <filters>
+            <field>TAG_Project_ID__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varTargetCompanyOpportunityRecordTypeID</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Conference_Call__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Opportunity</object>
+        <queriedFields>Id</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Queries the opportunities object for Target Company opportunities related to this project where stage = Closed Lost.</description>
+        <name>Count_Excluded</name>
+        <label>Count Excluded</label>
+        <locationX>50</locationX>
+        <locationY>792</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_Excluded</targetReference>
+        </connector>
+        <filterLogic>1 AND 2 AND 3</filterLogic>
+        <filters>
+            <field>TAG_Project_ID__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varTargetCompanyOpportunityRecordTypeID</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Stage_Detail__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Client Excluded</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Opportunity</object>
+        <queriedFields>Id</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Queries the opportunities object for Target Company opportunities related to this project where stage = Introduction or higher in the sales process.</description>
+        <name>Count_Leads_Generated</name>
+        <label>Count Leads Generated</label>
+        <locationX>50</locationX>
+        <locationY>1764</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_Leads_Generated</targetReference>
+        </connector>
+        <filterLogic>1 AND 2 AND (3 OR 4 OR 5 OR 6)</filterLogic>
+        <filters>
+            <field>TAG_Project_ID__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varTargetCompanyOpportunityRecordTypeID</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Introduction</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Advanced Lead</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Offer &amp; Better</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Closed Won</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Opportunity</object>
+        <queriedFields>Id</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Queries the opportunities object for Target Company opportunities related to this project where peak stage detail = LOI Executed or Higher.</description>
+        <name>Count_LOIs_Executed</name>
+        <label>Count LOI&apos;s Executed</label>
+        <locationX>50</locationX>
+        <locationY>2088</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_LOIs_Executed</targetReference>
+        </connector>
+        <filterLogic>1 AND 2 AND (3 OR 4 OR 5 OR 6)</filterLogic>
+        <filters>
+            <field>TAG_Project_ID__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varTargetCompanyOpportunityRecordTypeID</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage_Detail__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>LOI Executed</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage_Detail__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Financial Due Diligence / QoE Complete</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage_Detail__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Purchase Agreement Signed / Finalizing Deal</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage_Detail__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Deal Closed</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Opportunity</object>
+        <queriedFields>Id</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Queries the opportunities object for Target Company opportunities related to this project where NDA Executed is not null</description>
+        <name>Count_NDA_Executed</name>
+        <label>Count NDA Executed</label>
+        <locationX>50</locationX>
+        <locationY>1116</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_NDA_Executed</targetReference>
+        </connector>
+        <filterLogic>1 AND 2 AND 3</filterLogic>
+        <filters>
+            <field>TAG_Project_ID__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varTargetCompanyOpportunityRecordTypeID</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_NDA_Executed__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Opportunity</object>
+        <queriedFields>Id</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Queries the opportunities object for Target Company opportunities related to this project where peak stage detail = Verbal Offer Submitted or Higher.</description>
+        <name>Count_Offers_Submitted</name>
+        <label>Count Offers Submitted</label>
+        <locationX>50</locationX>
+        <locationY>2412</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_Offers_Submitted</targetReference>
+        </connector>
+        <filterLogic>1 AND 2 AND (3 OR 4 OR 5 OR 6 OR 7 OR 8)</filterLogic>
+        <filters>
+            <field>TAG_Project_ID__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varTargetCompanyOpportunityRecordTypeID</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage_Detail__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Verbal Offer Submitted</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage_Detail__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Written Offer Submitted</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage_Detail__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>LOI Executed</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage_Detail__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Financial Due Diligence / QoE Complete</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage_Detail__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Purchase Agreement Signed / Finalizing Deal</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage_Detail__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Deal Closed</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Opportunity</object>
+        <queriedFields>Id</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Queries the opportunities object for Target Company opportunities related to this project where stage = Introduction or higher.</description>
+        <name>Count_Successfully_Contacted</name>
+        <label>Count Successfully Contacted</label>
+        <locationX>50</locationX>
+        <locationY>2736</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_Successfully_Contacted</targetReference>
+        </connector>
+        <filterLogic>1 AND 2 AND (3 OR 4 OR 5 OR 6 OR 7)</filterLogic>
+        <filters>
+            <field>TAG_Project_ID__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varTargetCompanyOpportunityRecordTypeID</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Introduction</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Advanced Lead</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Offer &amp; Better</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Closed Won</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Peak_Stage_Detail__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Contact Made - Interest Unknown</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Opportunity</object>
+        <queriedFields>Id</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Queries the opportunities object for the count of Target Company opportunities related to this project.</description>
+        <name>Count_Total_Target_Opportunities</name>
+        <label>Count Total Target Opportunities</label>
+        <locationX>50</locationX>
+        <locationY>3060</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_Total_Target_Opportunities</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>TAG_Project_ID__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varTargetCompanyOpportunityRecordTypeID</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Opportunity</object>
+        <queriedFields>Id</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Queries the opportunities object for Target Company opportunities related to this project where Visited is not null</description>
+        <name>Count_Visit_InPerson_Meetings</name>
+        <label>Count Visit/In-Person Meetings</label>
+        <locationX>50</locationX>
+        <locationY>3384</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_Visit_In_Person_Meetings</targetReference>
+        </connector>
+        <filterLogic>1 AND 2 AND 3</filterLogic>
+        <filters>
+            <field>TAG_Project_ID__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varTargetCompanyOpportunityRecordTypeID</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>TAG_Visited__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Opportunity</object>
+        <queriedFields>Id</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Queries the Record Type object for the Target Company Opportunity Record Type ID.</description>
+        <name>Get_Target_Company_Record_Type_ID</name>
+        <label>Get Target Company Record Type ID</label>
+        <locationX>50</locationX>
+        <locationY>360</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Count_Approached</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>TAG_Target_Company</stringValue>
+            </value>
+        </filters>
+        <object>RecordType</object>
+        <outputAssignments>
+            <assignToReference>varTargetCompanyOpportunityRecordTypeID</assignToReference>
+            <field>Id</field>
+        </outputAssignments>
+    </recordLookups>
+    <recordUpdates>
+        <description>Updates the Approached field with the number of records returned from the Count approached query.</description>
+        <name>Update_Approached</name>
+        <label>Update Approached</label>
+        <locationX>50</locationX>
+        <locationY>684</locationY>
+        <connector>
+            <targetReference>Count_Excluded</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>TAG_Approached__c</field>
+            <value>
+                <elementReference>varApproached</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Sets the Conference Calls field with the value of the number of records returned from the Count Conference Calls query.</description>
+        <name>Update_Conference_Calls</name>
+        <label>Update Conference Calls</label>
+        <locationX>50</locationX>
+        <locationY>1656</locationY>
+        <connector>
+            <targetReference>Count_Leads_Generated</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>TAG_Conference_Calls__c</field>
+            <value>
+                <elementReference>varConferenceCalls</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Sets the excluded field with the record count from the Count Excluded query.</description>
+        <name>Update_Excluded</name>
+        <label>Update Excluded</label>
+        <locationX>50</locationX>
+        <locationY>1008</locationY>
+        <connector>
+            <targetReference>Count_NDA_Executed</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>TAG_Excluded__c</field>
+            <value>
+                <elementReference>varExcluded</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Sets the Leads Generated field with the value of the number of records from the Count Leads Generated query.</description>
+        <name>Update_Leads_Generated</name>
+        <label>Update Leads Generated</label>
+        <locationX>50</locationX>
+        <locationY>1980</locationY>
+        <connector>
+            <targetReference>Count_LOIs_Executed</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>TAG_Leads_Generated__c</field>
+            <value>
+                <elementReference>varLeadsGenerated</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Sets the LOI&apos;s Executed field to the number of records returned from the Count LOI&apos;s Executed query.</description>
+        <name>Update_LOI_s_Executed</name>
+        <label>Update LOI&apos;s Executed</label>
+        <locationX>50</locationX>
+        <locationY>2304</locationY>
+        <connector>
+            <targetReference>Count_Offers_Submitted</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>TAG_LOI_Executed__c</field>
+            <value>
+                <elementReference>varLOIExecuted</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Sets the NDAs Executed field with the value of the number of records returned from the Count NDA Executed query.</description>
+        <name>Update_NDAs_Executed</name>
+        <label>Update NDAs Executed</label>
+        <locationX>50</locationX>
+        <locationY>1332</locationY>
+        <connector>
+            <targetReference>Count_Conference_Calls</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>NDAs_Executed__c</field>
+            <value>
+                <elementReference>varNDAExecuted</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Updates the Offers Submitted field to the number of records from the Count Offers Submitted query.</description>
+        <name>Update_Offers_Submitted</name>
+        <label>Update Offers Submitted</label>
+        <locationX>50</locationX>
+        <locationY>2628</locationY>
+        <connector>
+            <targetReference>Count_Successfully_Contacted</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>TAG_Offers_Submitted__c</field>
+            <value>
+                <elementReference>varOffersSubmitted</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Updates the Successfully Contact field to the number of records returned from the Count Successfully Contacted query.</description>
+        <name>Update_Successfully_Contacted</name>
+        <label>Update Successfully Contacted</label>
+        <locationX>50</locationX>
+        <locationY>2952</locationY>
+        <connector>
+            <targetReference>Count_Total_Target_Opportunities</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>TAG_Successfully_Contacted__c</field>
+            <value>
+                <elementReference>varSuccessfullyContacted</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Updates the Total Target Companies field with the record count from the Count Total Target Companies query.</description>
+        <name>Update_Total_Target_Companies</name>
+        <label>Update Total Target Companies</label>
+        <locationX>50</locationX>
+        <locationY>3276</locationY>
+        <connector>
+            <targetReference>Count_Visit_InPerson_Meetings</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>TAG_Total_Target_Opportunities__c</field>
+            <value>
+                <elementReference>varTotalTargetCompanies</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Updates the Visit/In-Person Meetings field with the number of records from the Count Visit/In-Person Meetings query.</description>
+        <name>Update_Visit_In_Person_Meetings</name>
+        <label>Update Visit/In-Person Meetings</label>
+        <locationX>50</locationX>
+        <locationY>3600</locationY>
+        <inputAssignments>
+            <field>TAG_Visit_Inperson_Meetings__c</field>
+            <value>
+                <elementReference>varVisitInPersonMeetings</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_Automation_Settings</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>TAG_Stage__c</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Closed</stringValue>
+            </value>
+        </filters>
+        <object>TAG_Project__c</object>
+        <schedule>
+            <frequency>Daily</frequency>
+            <startDate>2025-03-27</startDate>
+            <startTime>09:30:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Variable to store the number of records returned from the Count Approached query.</description>
+        <name>varApproached</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>4</scale>
+    </variables>
+    <variables>
+        <description>Variable to store the number of records returned from the Count Conference Calls query.</description>
+        <name>varConferenceCalls</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>4</scale>
+    </variables>
+    <variables>
+        <description>Variable to store the record count from the Count Excluded query.</description>
+        <name>varExcluded</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>4</scale>
+    </variables>
+    <variables>
+        <description>Variable to store the number of records from the Count Leads Generated query.</description>
+        <name>varLeadsGenerated</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>4</scale>
+    </variables>
+    <variables>
+        <description>Variable to store the number of records from the Count LOI&apos;s Executed query.</description>
+        <name>varLOIExecuted</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>4</scale>
+    </variables>
+    <variables>
+        <description>Variable to store the number of records returned from the NDA Executed query.</description>
+        <name>varNDAExecuted</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>4</scale>
+    </variables>
+    <variables>
+        <description>Variable to store the number of records from the Count Offers Submitted query.</description>
+        <name>varOffersSubmitted</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>4</scale>
+    </variables>
+    <variables>
+        <description>Variable to store the number of records from the Count Successfully Contacted query.</description>
+        <name>varSuccessfullyContacted</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>4</scale>
+    </variables>
+    <variables>
+        <description>Variable to store the Target Company Opportunity Record Type ID.</description>
+        <name>varTargetCompanyOpportunityRecordTypeID</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Variable to store the number of records from the Count Total Target Companies query.</description>
+        <name>varTotalTargetCompanies</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>4</scale>
+    </variables>
+    <variables>
+        <description>Variable to store the number of records from the Count Visit/In-Person Meetings query.</description>
+        <name>varVisitInPersonMeetings</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>4</scale>
+    </variables>
+</Flow>

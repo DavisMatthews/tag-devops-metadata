@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <description>Check the stage of the project</description>
+        <name>Check_Project_Stage</name>
+        <label>Check Project Stage</label>
+        <locationX>446</locationX>
+        <locationY>323</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Kickoff</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.TAG_Stage__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Kick-Off</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Deliver_Marketing_Materials_Task</targetReference>
+            </connector>
+            <label>Kickoff</label>
+        </rules>
+    </decisions>
+    <description>Creates tasks automatically based on the project&apos;s stage to track key milestones and ensure timely follow-ups</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>dueDate</name>
+        <dataType>DateTime</dataType>
+        <expression>{!$Record.CreatedDate}+14</expression>
+    </formulas>
+    <formulas>
+        <name>recCreated</name>
+        <dataType>Boolean</dataType>
+        <expression>ISNEW()</expression>
+    </formulas>
+    <interviewLabel>Project - After Save - Create Tasks {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Project - After Save - Create Tasks</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Create task for Marketing Material</description>
+        <name>Create_Collect_Marketing_Materials_Task</name>
+        <label>Create Collect Marketing Materials Task</label>
+        <locationX>50</locationX>
+        <locationY>539</locationY>
+        <faultConnector>
+            <targetReference>CRMF_Subflow_Error_Collect</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>dueDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue> Collect client marketing materials, NDA, info request</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>$Record.TAG_Primary_Project_Manager__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue> Collect Marketing Materials</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <description>Create Deliver Marketing Materials Task</description>
+        <name>Create_Deliver_Marketing_Materials_Task</name>
+        <label>Create Deliver Marketing Materials Task</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <connector>
+            <targetReference>Create_Collect_Marketing_Materials_Task</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>CRMF_Subflow_Error</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>dueDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue> Deliver the marketing materials and first approval list to a client w/in 2 weeks of kicking-off</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>$Record.TAG_Primary_Project_Manager__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Deliver Marketing Materials</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <start>
+        <locationX>320</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_Project_Stage</targetReference>
+        </connector>
+        <filterFormula>{!$Setup.CRMF_Automation_Settings__c.CRMF_FlowsEnabled__c} = TRUE</filterFormula>
+        <object>TAG_Project__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <subflows>
+        <description>Use values from the parent flow to set the inputs for the &quot;Subflow: Error&quot; flow. By default, the parent flow stores all outputs. You can either reference outputs via the API name of the Subflow element or manually assign variables in the parent flow to store individual outputs from the &quot;Subflow: Error&quot; flow.</description>
+        <name>CRMF_Subflow_Error</name>
+        <label>Subflow: Error</label>
+        <locationX>578</locationX>
+        <locationY>539</locationY>
+        <flowName>CRMF_Subflow_Error</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>varFaultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <description>Use values from the parent flow to set the inputs for the &quot;Subflow: Error&quot; flow. By default, the parent flow stores all outputs. You can either reference outputs via the API name of the Subflow element or manually assign variables in the parent flow to store individual outputs from the &quot;Subflow: Error&quot; flow.</description>
+        <name>CRMF_Subflow_Error_Collect</name>
+        <label>Subflow: Error</label>
+        <locationX>314</locationX>
+        <locationY>647</locationY>
+        <flowName>CRMF_Subflow_Error</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>varFaultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+</Flow>

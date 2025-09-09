@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>TAG_Approval_List_Name__c</columns>
+    <columns>TAG_Status__c</columns>
+    <columns>TAG_Target_Date__c</columns>
+    <columns>TAG_Approval_List_Sent__c</columns>
+    <columns>TAG_Approval_List_Returned__c</columns>
+    <filterScope>Mine</filterScope>
+    <label>All</label>
+</ListView>

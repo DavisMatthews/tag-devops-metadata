@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TAG_LOI_Executed__c</fullName>
+    <defaultValue>0</defaultValue>
+    <description>This field is auto-calculated by a flow automation. It&apos;s the count of all target company opportunities related to this project record where Peak Stage = &quot;LOI Executed&quot; or higher in the sales process.</description>
+    <externalId>false</externalId>
+    <label>LOI&apos;s Executed</label>
+    <precision>4</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

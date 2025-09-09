@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TAG_Approval_List_Sent__c</fullName>
+    <description>The date the approval list was sent to the buyer account. This field is updated automatically via flow automation.</description>
+    <inlineHelpText>The date the approval list was sent to the buyer account.</inlineHelpText>
+    <label>Approval List Sent</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

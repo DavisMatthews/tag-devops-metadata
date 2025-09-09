@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Assigns the Opportunity name variable to the formula for Buyer Opportunities where the Account Type is a Buyer and the Buyer does not have a Parent value.</description>
+        <name>Assign_Buyer_Add_On_No_Parent</name>
+        <label>Assign Buyer Add On No Parent</label>
+        <locationX>314</locationX>
+        <locationY>647</locationY>
+        <assignmentItems>
+            <assignToReference>varOppName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>forOppNameBuyerAddOnNoParent</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Set_Opp_Name</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the Opportunity name variable to the formula for Buyer Opportunities where the Account Type is a Buyer and the Buyer as a Parent value.</description>
+        <name>Assign_Buyer_Add_On_Parent</name>
+        <label>Assign Buyer Add On Parent</label>
+        <locationX>50</locationX>
+        <locationY>647</locationY>
+        <assignmentItems>
+            <assignToReference>varOppName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>forOppNameBuyerAddOnWithParent</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Set_Opp_Name</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the Opportunity variable with the formula for Buyer Opportunities where the Account Buyer Type is platform.</description>
+        <name>Assign_Buyer_Platform</name>
+        <label>Assign Buyer Platform</label>
+        <locationX>842</locationX>
+        <locationY>539</locationY>
+        <assignmentItems>
+            <assignToReference>varOppName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>forOppNameBuyerPlatform</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Set_Opp_Name</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the Target Company Add-On Buyer opportunity name formula to the opportunity name variable.</description>
+        <name>Assign_Target_Company_Add_On</name>
+        <label>Assign Target Company Add On</label>
+        <locationX>1370</locationX>
+        <locationY>647</locationY>
+        <assignmentItems>
+            <assignToReference>varOppName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>forOppNameTargetCompanyAddOn</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Set_Opp_Name</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the Target Company Buyer Null formula value to the opportunity name variable.</description>
+        <name>Assign_Target_Company_Buyer_Null</name>
+        <label>Assign Target Company Buyer Null</label>
+        <locationX>2162</locationX>
+        <locationY>539</locationY>
+        <assignmentItems>
+            <assignToReference>varOppName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>forOppNameTargetCompanyBuyerNull</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Set_Opp_Name</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the Target Company platform opportunity name formula to the opportunity name variable.</description>
+        <name>Assign_Target_Company_Platform</name>
+        <label>Assign Target Company Platform</label>
+        <locationX>1634</locationX>
+        <locationY>647</locationY>
+        <assignmentItems>
+            <assignToReference>varOppName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>forOppNameTargetCompanyPlatform</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Set_Opp_Name</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Checks the Buyer type and sends the flow down different paths based on the value.</description>
+        <name>Check_Buyer_Buyer_Type</name>
+        <label>Check Buyer Buyer Type</label>
+        <locationX>710</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Buyer_Add_on</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Account.TAG_Buyer_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Add-on</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_Buyer_Parent</targetReference>
+            </connector>
+            <label>Add-on</label>
+        </rules>
+        <rules>
+            <name>Buyer_Platform</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Account.TAG_Buyer_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Platform</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Buyer_Platform</targetReference>
+            </connector>
+            <label>Platform</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Checks to see if the Opportunity.Buyer field has been filled out and sends the flow down different paths based on the value.</description>
+        <name>Check_Buyer_Field</name>
+        <label>Check Buyer Field</label>
+        <locationX>2030</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Buyer_Field_Populated</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.TAG_Buyer__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_Target_Company_Buyer_Type</targetReference>
+            </connector>
+            <label>Buyer Field Populated</label>
+        </rules>
+        <rules>
+            <name>Buyer_Field_NULL</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.TAG_Buyer__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Target_Company_Buyer_Null</targetReference>
+            </connector>
+            <label>Buyer Field NULL</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Checks to see if the Buyer Account has a parent Account record or not and sends the flow down different paths based on the value.</description>
+        <name>Check_Buyer_Parent</name>
+        <label>Check Buyer Parent</label>
+        <locationX>314</locationX>
+        <locationY>539</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Buyer_Has_Parent</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Account.ParentId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Buyer_Add_On_Parent</targetReference>
+            </connector>
+            <label>Has Parent</label>
+        </rules>
+        <rules>
+            <name>Buyer_No_Parent</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Account.ParentId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Buyer_Add_On_No_Parent</targetReference>
+            </connector>
+            <label>No Parent</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Sends the flow down different paths based on the opportunity record type.</description>
+        <name>Check_Opportunity_Record_Type</name>
+        <label>Check Opportunity Record Type</label>
+        <locationX>1700</locationX>
+        <locationY>323</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Buyer</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>TAG_Buyer</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_Buyer_Buyer_Type</targetReference>
+            </connector>
+            <label>Buyer</label>
+        </rules>
+        <rules>
+            <name>Target_Company</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>TAG_Target_Company</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_Buyer_Field</targetReference>
+            </connector>
+            <label>Target Company</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Checks the Buyer type and sends the flow down different paths based on the value.</description>
+        <name>Check_Target_Company_Buyer_Type</name>
+        <label>Check Target Company Buyer Type</label>
+        <locationX>1634</locationX>
+        <locationY>539</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Target_Company_Add_on</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.TAG_Buyer__r.TAG_Buyer_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Add-on</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Target_Company_Add_On</targetReference>
+            </connector>
+            <label>Add-on</label>
+        </rules>
+        <rules>
+            <name>Target_Company_Platform</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.TAG_Buyer__r.TAG_Buyer_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Platform</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Target_Company_Platform</targetReference>
+            </connector>
+            <label>Platform</label>
+        </rules>
+    </decisions>
+    <description>Automation that sets the opportunity name.</description>
+    <environments>Default</environments>
+    <formulas>
+        <description>Formula for Buyer opportunities where the Account buyer type is set to Add On and the Account does not have a parent record.</description>
+        <name>forOppNameBuyerAddOnNoParent</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Account.Name}+&apos; - Add-on Buyer&apos;</expression>
+    </formulas>
+    <formulas>
+        <description>Formula for Buyer opportunities where the Account buyer type is set to Add On and the Account has a parent record.</description>
+        <name>forOppNameBuyerAddOnWithParent</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Account.Name}+&apos; (&apos;+{!$Record.Account.Parent.Name}+&apos;) - Add-on Buyer&apos;</expression>
+    </formulas>
+    <formulas>
+        <description>Formula for Buyer opportunities where the account buyer type is set to platform.</description>
+        <name>forOppNameBuyerPlatform</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Account.Name}+&apos; - Platform Buyer&apos;</expression>
+    </formulas>
+    <formulas>
+        <description>Formula to calculate the opportunity name for Target Company opportunities where the buyer type is Add-on.</description>
+        <name>forOppNameTargetCompanyAddOn</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Account.Name}+&apos; - &apos;+{!$Record.TAG_Buyer__r.Name}</expression>
+    </formulas>
+    <formulas>
+        <description>Formula for the opportunity name for Target Company opportunities where the Buyer field is NULL.</description>
+        <name>forOppNameTargetCompanyBuyerNull</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Account.Name}+&apos; Target Company Opportunity&apos;</expression>
+    </formulas>
+    <formulas>
+        <description>Formula for Target Company opportunities where the buyer type is platform.</description>
+        <name>forOppNameTargetCompanyPlatform</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Account.Name}+&apos; - &apos;+{!$Record.TAG_Buyer__r.Name}+&apos; (&apos;+TEXT({!$Record.TAG_Buyer__r.Industry})+&apos;)&apos;</expression>
+    </formulas>
+    <interviewLabel>Opportunity - After Save - Set Opportunity Name {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Opportunity - After Save - Set Opportunity Name</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Sets the opportunity name.</description>
+        <name>Set_Opp_Name</name>
+        <label>Set Opp Name</label>
+        <locationX>1700</locationX>
+        <locationY>1007</locationY>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>varOppName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>1574</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_Opportunity_Record_Type</targetReference>
+        </connector>
+        <filterFormula>AND(
+{!$Setup.CRMF_Automation_Settings__c.CRMF_FlowsEnabled__c} = TRUE,
+OR(
+ISNEW(),
+ISCHANGED({!$Record.TAG_Buyer__c})
+)
+)</filterFormula>
+        <object>Opportunity</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <triggerOrder>400</triggerOrder>
+    <variables>
+        <description>Variable to store the Opportunity Name.</description>
+        <name>varOppName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

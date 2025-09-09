@@ -1,0 +1,138 @@
+<apex:page standardController="Opportunity" recordSetVar="sobjects" extensions="PDFB_ListConvertorController" standardStylesheets="false" sidebar="false">
+    <apex:slds /> 
+
+    <script type="text/javascript">
+    var recordIds = [{!recordIds}];
+    var docConfigId = "YOUR DOCCONFIG ID"; <!-- TODO: You can change this according your needs -->
+    var alternativeName = null; <!-- TODO: You can change this according your needs -->
+    var locale = null; <!-- TODO: You can change this according your needs -->
+    var packId = null; <!-- TODO: You can change this according your needs -->
+
+    var maxval = recordIds.length;
+    var curval = 0;
+    var callnext = true;
+
+    document.onreadystatechange = function(){
+        if(document.readyState === 'complete'){
+
+            /*
+            - loop over all recordIds
+                - call convert
+                - if all ok an download is set => 
+            */
+            document.getElementById("myProgressBar").setAttribute("aria-valuemax", maxval);
+            document.getElementById("nrOfDocs").innerText = maxval;
+            document.getElementById("allDone").style.display = "none";
+            start();
+        }
+    }
+    
+    async function start () {
+        for (recordId of recordIds) {
+            await doConvert(recordId);
+            curval++;
+            document.getElementById("myProgressBar").setAttribute("aria-valuenow", curval);
+            document.getElementById("myProgressBarWidth").style.width = (curval / maxval) * 100 + '%';
+        }
+        document.getElementById("allDone").style.display = "block";
+    }
+    /*
+    
+                docConfigIds, 
+                locale, 
+                numCurrLocale, 
+                alternativeName, 
+                targetType,
+                pdfActionType, 
+                packId, 
+                deliveryOverwrite, 
+    */
+    function doConvert(recordId) {
+        return new Promise(resolve => {
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.PDFB_ListConvertorController.doConvert}',
+                docConfigId, 
+                recordId, 
+                locale,
+                alternativeName,
+                packId,
+                function(result, event){
+                    if (event.status) {
+                        
+                        var docConfigData = JSON.parse(result);
+                    
+                        let dlnk = document.getElementById('fileDownload');
+                        dlnk.href = "data:application/octet-stream;base64," + docConfigData.base64;  // Adds the pdf to the html anchor
+                        dlnk.download = docConfigData.title; //  Sets the title (filename) of the document to download
+                        dlnk.click();  //  initiates the download automatically when the document is generated, no user has to click
+            
+            
+
+                        var x=document.getElementById("genDocsTitles");
+                        newLI = document.createElement("li");
+                    
+                        newText = document.createTextNode(docConfigData.title);
+                        newLI.appendChild(newText);
+                        x.appendChild(newLI);
+
+                    } else if (event.type === 'exception') {
+                        document.getElementById("responseErrors").innerHTML = 
+                            event.message + "<br/>\n<pre>" + event.where + "</pre>";
+                    } else {
+                        document.getElementById("responseErrors").innerHTML = event.message;
+                    }
+                    resolve();
+                }, 
+            {escape: false}
+            );
+        });
+    }
+    </script>
+
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-account" title="account">
+                        <span class="slds-assistive-text">account</span>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span>Total nr of documents to generate: </span><span id="nrOfDocs"></span>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">
+            
+            <div id="myProgressBar" class="slds-progress-bar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25" role="progressbar">
+                <span class="slds-progress-bar__value" style="width:0%" id="myProgressBarWidth">
+                    <span class="slds-assistive-text">Progress: %</span>
+                </span>
+            </div>
+            <br/>
+            Starting...
+            <ol class="slds-list_ordered" id="genDocsTitles">
+            </ol>
+            <br/>
+            <br/>
+            <div id="allDone">
+                ...All Done, click "Go Back" below to return to the list view
+            </div>
+        </div>
+        <footer class="slds-card__footer">
+            <button type="button" onclick="history.back();">Go Back</button>
+            <!--<apex:outputLink value="{!originalUrl}">Go Back</apex:outputLink>-->
+        </footer>
+    </article>
+    
+    <a name="fileDownload" id="fileDownload" download="" target="_blank"></a>
+
+</apex:page>

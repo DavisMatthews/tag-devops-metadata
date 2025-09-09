@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <description>Evaluates the value in the Stage Automation field and takes a different path depending on the value.</description>
+        <name>Stage_Automation_Value</name>
+        <label>Stage Automation Value?</label>
+        <locationX>1106</locationX>
+        <locationY>287</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Approved_Ready_for_Outreach</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.TAG_Stage_Automation__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Approved Ready for Outreach</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Stage_to_Research_and_Stage_Detail_to_Approved_Ready_for_Outreach</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>Approved Ready for Outreach</label>
+        </rules>
+        <rules>
+            <name>Client_Excluded</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.TAG_Stage_Automation__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Client Excluded</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Stage_Research_and_Stage_Detail_Client_Excluded</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>Client Excluded</label>
+        </rules>
+        <rules>
+            <name>First_Cycle_Approach</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.TAG_Stage_Automation__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>First Cycle Approach</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Stage_Target_Outreach_and_Stage_Detail_First_Cycle_Approach</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>First Cycle Approach</label>
+        </rules>
+        <rules>
+            <name>Target_No_Interest_No_Response</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.TAG_Stage_Automation__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Target No Interest – No Response</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Stage_Target_No_Interest_and_Stage_Detail_No_Response</targetReference>
+            </connector>
+            <label>Target No Interest - No Response</label>
+        </rules>
+        <rules>
+            <name>Second_Cycle_Approach</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.TAG_Stage_Automation__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Second Cycle Approach</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Stage_Target_Outreach_and_Stage_Detail_Second_Cycle_Approach</targetReference>
+            </connector>
+            <label>Second Cycle Approach</label>
+        </rules>
+        <rules>
+            <name>Sent_for_Client_Approval</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.TAG_Stage_Automation__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Sent for Client Approval</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Stage_Research_and_Stage_Detail_Sent_for_Client_Approval</targetReference>
+            </connector>
+            <label>Sent for Client Approval</label>
+        </rules>
+        <rules>
+            <name>Ready_for_External_Review</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.TAG_Stage_Automation__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Ready for External Review</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Stage_Research_and_Stage_Detail_Ready_for_External_Review</targetReference>
+            </connector>
+            <label>Ready for External Review</label>
+        </rules>
+        <rules>
+            <name>Client_No_Interest_Other</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.TAG_Stage_Automation__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Client No Interest - Other</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Stage_No_Interest_and_Stage_Detail_Client_No_Interest_Loss_Reason_Other</targetReference>
+            </connector>
+            <label>Client No Interest - Other</label>
+        </rules>
+    </decisions>
+    <description>Sets the Stage and Stage Detail depending on the Stage Automation value.</description>
+    <environments>Default</environments>
+    <interviewLabel>Opportunity - Before Save - Sets Stage and Stage Detail {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Opportunity - Before Save - Set Stage and Stage Detail from Stage Automation</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Sets the Stage to &apos;Research&apos; and the Stage Detail to &apos;Client Excluded&apos;.</description>
+        <name>Set_Stage_Research_and_Stage_Detail_Client_Excluded</name>
+        <label>Set Stage Research and Stage Detail Client Excluded</label>
+        <locationX>314</locationX>
+        <locationY>395</locationY>
+        <inputAssignments>
+            <field>StageName</field>
+            <value>
+                <stringValue>Research</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TAG_Stage_Detail__c</field>
+            <value>
+                <stringValue>Client Excluded</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Sets the Stage to &apos;Target No Interest&apos; and the Stage Detail to &apos;No Response&apos;.</description>
+        <name>Set_Stage_Target_No_Interest_and_Stage_Detail_No_Response</name>
+        <label>Set Stage Target No Interest and Stage Detail No Response</label>
+        <locationX>842</locationX>
+        <locationY>395</locationY>
+        <inputAssignments>
+            <field>StageName</field>
+            <value>
+                <stringValue>No Interest</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TAG_Loss_Reason_Detail__c</field>
+            <value>
+                <stringValue>No Response to Outreach Cycles</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TAG_Stage_Detail__c</field>
+            <value>
+                <stringValue>Target No Interest</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Sets the Stage to &apos;Target Outreach&apos; and the Stage Detail to &apos;First Cycle Approach&apos;.</description>
+        <name>Set_Stage_Target_Outreach_and_Stage_Detail_First_Cycle_Approach</name>
+        <label>Set Stage Target Outreach and Stage Detail First Cycle Approach</label>
+        <locationX>578</locationX>
+        <locationY>395</locationY>
+        <inputAssignments>
+            <field>StageName</field>
+            <value>
+                <stringValue>Target Outreach</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TAG_Stage_Detail__c</field>
+            <value>
+                <stringValue>First Cycle Approach</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Sets the Stage to &apos;Target Outreach&apos; and the Stage Detail to &apos;Second Cycle Approach&apos;.</description>
+        <name>Set_Stage_Target_Outreach_and_Stage_Detail_Second_Cycle_Approach</name>
+        <label>Stage Target Outreach and Stage Detail Second Cycle Approach</label>
+        <locationX>1106</locationX>
+        <locationY>395</locationY>
+        <inputAssignments>
+            <field>StageName</field>
+            <value>
+                <stringValue>Target Outreach</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TAG_Stage_Detail__c</field>
+            <value>
+                <stringValue>Second Cycle Approach</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Sets the Stage to &apos;Research&apos; and the Stage Detail to &apos;Approved Ready for Outreach&apos;.</description>
+        <name>Set_Stage_to_Research_and_Stage_Detail_to_Approved_Ready_for_Outreach</name>
+        <label>Set Stage Research and Stage Detail Approved Ready for Outreach</label>
+        <locationX>50</locationX>
+        <locationY>395</locationY>
+        <inputAssignments>
+            <field>StageName</field>
+            <value>
+                <stringValue>Research</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TAG_Stage_Detail__c</field>
+            <value>
+                <stringValue>Approved Ready for Outreach</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Sets the Stage to &apos;No Interest&apos; and the Stage Detail to &apos;Client No Interest&apos; and Loss Reason Detail to &apos;Other.</description>
+        <name>Stage_No_Interest_and_Stage_Detail_Client_No_Interest_Loss_Reason_Other</name>
+        <label>Stage No Interest and Stage Detail Client No Interest Loss Reason Other</label>
+        <locationX>1898</locationX>
+        <locationY>395</locationY>
+        <inputAssignments>
+            <field>StageName</field>
+            <value>
+                <stringValue>No Interest</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TAG_Loss_Reason_Detail__c</field>
+            <value>
+                <stringValue>Other</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TAG_Stage_Detail__c</field>
+            <value>
+                <stringValue>Client No Interest</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Sets the Stage to &apos;Research&apos; and the Stage Detail to &apos;Ready for External Review&apos;.</description>
+        <name>Stage_Research_and_Stage_Detail_Ready_for_External_Review</name>
+        <label>Stage Research and Stage Detail Ready for External Review</label>
+        <locationX>1634</locationX>
+        <locationY>395</locationY>
+        <inputAssignments>
+            <field>StageName</field>
+            <value>
+                <stringValue>Research</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TAG_Stage_Detail__c</field>
+            <value>
+                <stringValue>Ready for External Review</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Sets the Stage to &apos;Research&apos; and the Stage Detail to &apos;Sent for Client Approval&apos;.</description>
+        <name>Stage_Research_and_Stage_Detail_Sent_for_Client_Approval</name>
+        <label>Stage Research and Stage Detail Sent for Client Approval</label>
+        <locationX>1370</locationX>
+        <locationY>395</locationY>
+        <inputAssignments>
+            <field>StageName</field>
+            <value>
+                <stringValue>Research</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TAG_Stage_Detail__c</field>
+            <value>
+                <stringValue>Sent for Client Approval</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>980</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Stage_Automation_Value</targetReference>
+        </connector>
+        <filterFormula>AND(
+{!$Setup.CRMF_Automation_Settings__c.CRMF_FlowsEnabled__c} = TRUE,
+{!$Record.RecordType.DeveloperName} = &apos;TAG_Target_Company&apos;,
+ISCHANGED({!$Record.TAG_Stage_Automation__c})
+)</filterFormula>
+        <object>Opportunity</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+    <triggerOrder>600</triggerOrder>
+</Flow>

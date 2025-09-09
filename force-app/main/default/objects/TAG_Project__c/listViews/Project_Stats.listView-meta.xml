@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Project_Stats</fullName>
+    <columns>NAME</columns>
+    <columns>TAG_Primary_Project_Manager__c</columns>
+    <columns>TAG_Backup_Project_Manager__c</columns>
+    <columns>TAG_Third_Project_Manager__c</columns>
+    <columns>TAG_Project_Name__c</columns>
+    <columns>TAG_Start_Date__c</columns>
+    <columns>TAG_Next_List_Target_Date__c</columns>
+    <columns>TAG_Total_Target_Opportunities__c</columns>
+    <columns>TAG_Excluded__c</columns>
+    <columns>TAG_Approached__c</columns>
+    <columns>TAG_Successfully_Contacted__c</columns>
+    <columns>TAG_Leads_Generated__c</columns>
+    <columns>TAG_Conference_Calls__c</columns>
+    <columns>TAG_Visit_Inperson_Meetings__c</columns>
+    <columns>TAG_Offers_Submitted__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>TAG_Stage__c</field>
+        <operation>notEqual</operation>
+        <value>Tail Period,Closed</value>
+    </filters>
+    <label>Project Stats</label>
+</ListView>

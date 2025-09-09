@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>This automation sets the buyer field based on the Approval List selected.</description>
+    <environments>Default</environments>
+    <interviewLabel>Opportunity - After Save - Set Buyer {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Opportunity - After Save - Set Buyer</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Sets the buyer field to equal the Buyer on the related project related to the approval list on this opportunity record.</description>
+        <name>Set_Buyer</name>
+        <label>Set Buyer</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <inputAssignments>
+            <field>TAG_Buyer__c</field>
+            <value>
+                <elementReference>$Record.TAG_Approval_List__r.TAG_Project__r.TAG_Buyer__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Set_Buyer</targetReference>
+        </connector>
+        <filterFormula>AND(
+{!$Setup.CRMF_Automation_Settings__c.CRMF_FlowsEnabled__c} = TRUE,
+{!$Record.RecordType.DeveloperName} = &apos;TAG_Target_Company&apos;,
+OR(
+ISNEW(),
+ISCHANGED({!$Record.TAG_Approval_List__c})
+)
+)</filterFormula>
+        <object>Opportunity</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <triggerOrder>100</triggerOrder>
+</Flow>

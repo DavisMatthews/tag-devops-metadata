@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TAG_Salesforce_Consultant__c</fullName>
+    <description>Field to store the User ID of the primary salesforce consultant user supporting this org.</description>
+    <externalId>false</externalId>
+    <label>Salesforce Consultant</label>
+    <length>18</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

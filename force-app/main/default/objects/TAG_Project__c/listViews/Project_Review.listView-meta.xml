@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Project_Review</fullName>
+    <columns>TAG_Stage__c</columns>
+    <columns>TAG_Buyer__c</columns>
+    <columns>NAME</columns>
+    <columns>TAG_Project_Name__c</columns>
+    <columns>TAG_Primary_Project_Manager__c</columns>
+    <columns>TAG_Backup_Project_Manager__c</columns>
+    <columns>TAG_Third_Project_Manager__c</columns>
+    <columns>TAG_Start_Date__c</columns>
+    <columns>TAG_Deliverables_Completed__c</columns>
+    <columns>TAG_Marketing_Deck_Sent__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>TAG_Stage__c</field>
+        <operation>equals</operation>
+        <value>Kick-Off,On Going</value>
+    </filters>
+    <label>Project Review</label>
+</ListView>

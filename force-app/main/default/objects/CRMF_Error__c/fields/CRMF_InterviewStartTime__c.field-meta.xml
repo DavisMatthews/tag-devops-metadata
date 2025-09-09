@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CRMF_InterviewStartTime__c</fullName>
+    <description>The date/time that the flow (interview) that created this error record started.</description>
+    <inlineHelpText>The date/time that the flow (interview) that created this error record started.</inlineHelpText>
+    <label>Interview Start Time</label>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

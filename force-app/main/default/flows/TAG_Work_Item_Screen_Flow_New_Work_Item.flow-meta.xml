@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Redirects the browser to the newly created work item record.</description>
+        <name>Redirect_to_New_Work_Item</name>
+        <label>Redirect to New Work Item</label>
+        <locationX>314</locationX>
+        <locationY>566</locationY>
+        <actionName>c:navigateToRecord</actionName>
+        <actionType>component</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>recordId</name>
+            <value>
+                <elementReference>varWorkItemID</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>c:navigateToRecord</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>62.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <description>Sends the flow down different paths based on the User&apos;s profile.</description>
+        <name>Check_User_Profile</name>
+        <label>Check User Profile</label>
+        <locationX>182</locationX>
+        <locationY>134</locationY>
+        <defaultConnector>
+            <targetReference>Get_tremila_sfdx_Project</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>System Administrator</defaultConnectorLabel>
+        <rules>
+            <name>Standard_User</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Profile.Name</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>System Administrator</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>screenInsufficientPermissions</targetReference>
+            </connector>
+            <label>Standard User</label>
+        </rules>
+    </decisions>
+    <description>Screen flow for creating a new work item.  New work items can be created out of the box, but the purpose of this screen flow is a for a quicker streamlined approach.</description>
+    <environments>Default</environments>
+    <interviewLabel>Work Item - Screen Flow - New Work Item {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Work Item - Screen Flow - New Work Item</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordCreates>
+        <description>Creates a work item record.</description>
+        <name>Create_Work_Item_Record</name>
+        <label>Create Work Item Record</label>
+        <locationX>314</locationX>
+        <locationY>458</locationY>
+        <assignRecordIdToReference>varWorkItemID</assignRecordIdToReference>
+        <connector>
+            <targetReference>Redirect_to_New_Work_Item</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>CRMF_Subflow_Error</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>sf_devops__Assigned_To__c</field>
+            <value>
+                <elementReference>$Setup.TAG_Team_Members__c.TAG_Salesforce_Consultant__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>sf_devops__Description__c</field>
+            <value>
+                <elementReference>txtDesc.fieldValue</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>sf_devops__Project__c</field>
+            <value>
+                <elementReference>Get_tremila_sfdx_Project.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>sf_devops__Subject__c</field>
+            <value>
+                <elementReference>txtSubject</elementReference>
+            </value>
+        </inputAssignments>
+        <object>sf_devops__Work_Item__c</object>
+    </recordCreates>
+    <recordLookups>
+        <description>Queries the sf_devops__Project__c object for the tremila-sfdx project record.</description>
+        <name>Get_tremila_sfdx_Project</name>
+        <label>Get tremila-sfdx Project</label>
+        <locationX>314</locationX>
+        <locationY>242</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>screenNewWorkItem</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>tremila-sfdx</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>sf_devops__Project__c</object>
+        <queriedFields>Id</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <screens>
+        <description>Screens to display to the user that they do not have permissions to create a work item.</description>
+        <name>screenInsufficientPermissions</name>
+        <label>Insufficient Permissions</label>
+        <locationX>50</locationX>
+        <locationY>242</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>distxtInsuficientPermissions</name>
+            <fieldText>&lt;p&gt;Unfortunately, you do not have permission to create a new work item.  Please contact your System Administrator.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>false</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <description>A screen element to house the form for creating a new work item.</description>
+        <name>screenNewWorkItem</name>
+        <label>New Work Item Screen</label>
+        <locationX>314</locationX>
+        <locationY>350</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Create_Work_Item_Record</targetReference>
+        </connector>
+        <fields>
+            <name>distxtNewWorkItem</name>
+            <fieldText>&lt;p&gt;&lt;strong&gt;Fill out the form below to create a new work item.&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>txtSubject</name>
+            <dataType>String</dataType>
+            <fieldText>Subject</fieldText>
+            <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>txtDesc</name>
+            <extensionName>c:screenFlowRichText</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>visibleLines</name>
+                <value>
+                    <numberValue>5.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>fieldLabel</name>
+                <value>
+                    <stringValue>Description</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_User_Profile</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <subflows>
+        <description>Use values from the parent flow to set the inputs for the &quot;Subflow: Error&quot; flow. By default, the parent flow stores all outputs. You can either reference outputs via the API name of the Subflow element or manually assign variables in the parent flow to store individual outputs from the &quot;Subflow: Error&quot; flow.</description>
+        <name>CRMF_Subflow_Error</name>
+        <label>Subflow: Error</label>
+        <locationX>578</locationX>
+        <locationY>566</locationY>
+        <flowName>CRMF_Subflow_Error</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>Create_Work_Item_Record</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>varFaultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <variables>
+        <description>Variable to store the ID of the newly created work item record.</description>
+        <name>varWorkItemID</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

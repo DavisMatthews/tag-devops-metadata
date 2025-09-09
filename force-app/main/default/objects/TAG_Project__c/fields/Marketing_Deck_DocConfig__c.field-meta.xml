@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Marketing_Deck_DocConfig__c</fullName>
+    <description>The PDFButler Doc Config ID for pulling templates for marketing decks</description>
+    <externalId>false</externalId>
+    <inlineHelpText>PDFButler Doc Config for decks</inlineHelpText>
+    <label>Marketing Deck Doc Config</label>
+    <length>255</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

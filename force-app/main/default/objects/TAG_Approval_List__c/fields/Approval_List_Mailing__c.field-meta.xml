@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Approval_List_Mailing__c</fullName>
+    <description>##Conga created button:00ban000003BcHy</description>
+    <externalId>false</externalId>
+    <formula>&quot;&amp;solmgr=1 &quot; + 
+&quot;&amp;id=&quot; + Id + &quot; &quot; + 
+&quot;&amp;ofn=&quot; + TAG_Approval_List_Name__c + &quot; &quot; + 
+&quot;&amp;queryid=[ApprovalList]a0ran00000TR0KGAA1&quot; + 
+&quot;&amp;qmode=Download&quot;</formula>
+    <label>Approval List &amp; Mailing</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

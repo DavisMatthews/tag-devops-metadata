@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Assignment for four weeks records</description>
+        <name>Assignment_for_four_weeks_records</name>
+        <label>Assignment for four weeks records</label>
+        <locationX>402</locationX>
+        <locationY>684</locationY>
+        <assignmentItems>
+            <assignToReference>singleTask.Subject</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Schedule Client Update Call</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>singleTask.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Have an update call every 2 weeks with our clients to update them on project stats.</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>singleTask.ActivityDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>dueDate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>singleTask.OwnerId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Iterate_over_Project_Records.TAG_Primary_Project_Manager__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>cerateTask</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>singleTask</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Iterate_over_Project_Records</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assignment for two weeks records</description>
+        <name>Assignment_for_two_week_records</name>
+        <label>Assignment for two week records</label>
+        <locationX>138</locationX>
+        <locationY>684</locationY>
+        <assignmentItems>
+            <assignToReference>singleTask.Subject</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Send New Approval List</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>singleTask.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Sending out a new approval list every 2-4 weeks, having a update call every 2-3 weeks with our clients to update them on project stats</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>singleTask.ActivityDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>dueDate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>singleTask.OwnerId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Iterate_over_Project_Records.TAG_Primary_Project_Manager__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>cerateTask</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>singleTask</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Iterate_over_Project_Records</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Checks the Automation Bypass custom setting to see if flows are enabled or not and either allows the flow to run or not based on the value.</description>
+        <name>Check_Automation_Bypass</name>
+        <label>Check Automation Bypass</label>
+        <locationX>314</locationX>
+        <locationY>252</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Flows_Enabled</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Setup.CRMF_Automation_Settings__c.CRMF_FlowsEnabled__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Project_Record</targetReference>
+            </connector>
+            <label>Flows Enabled</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check the number of weeks passed</description>
+        <name>Check_On_Weeks</name>
+        <label>Check On Weeks</label>
+        <locationX>402</locationX>
+        <locationY>576</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Two_Week</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>twoWeek</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assignment_for_two_week_records</targetReference>
+            </connector>
+            <label>Two Week</label>
+        </rules>
+        <rules>
+            <name>Four_Weeks</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>fourWeek</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assignment_for_four_weeks_records</targetReference>
+            </connector>
+            <label>Four Weeks</label>
+        </rules>
+    </decisions>
+    <description>Creates recurring tasks at predefined intervals (e.g., every 2 or 4 weeks) to ensure ongoing project updates, approval list sends, and client follow-ups</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>dueDate</name>
+        <dataType>Date</dataType>
+        <expression>TODAY()</expression>
+    </formulas>
+    <formulas>
+        <name>fourWeek</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(
+    NOW() - {!Iterate_over_Project_Records.CreatedDate} &gt;= 28,
+    NOW() - {!Iterate_over_Project_Records.CreatedDate} &lt; 29
+)</expression>
+    </formulas>
+    <formulas>
+        <name>twoWeek</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(
+    NOW() - {!Iterate_over_Project_Records.CreatedDate} &gt;= 14,
+    NOW() - {!Iterate_over_Project_Records.CreatedDate} &lt; 15
+)</expression>
+    </formulas>
+    <interviewLabel>Project - Scheduled - Create Tasks {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Project - Scheduled - Create Tasks</label>
+    <loops>
+        <description>Run for each loop for project records</description>
+        <name>Iterate_over_Project_Records</name>
+        <label>Iterate over Project Records</label>
+        <locationX>50</locationX>
+        <locationY>468</locationY>
+        <collectionReference>Get_Project_Record</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Check_On_Weeks</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Create_Task_records_from_Project</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Create task records</description>
+        <name>Create_Task_records_from_Project</name>
+        <label>Create Task records from Project</label>
+        <locationX>50</locationX>
+        <locationY>960</locationY>
+        <faultConnector>
+            <targetReference>CRMF_Subflow_Error</targetReference>
+        </faultConnector>
+        <inputReference>cerateTask</inputReference>
+    </recordCreates>
+    <recordLookups>
+        <description>Get Project Record for Ongoing Stage</description>
+        <name>Get_Project_Record</name>
+        <label>Get Project Record</label>
+        <locationX>50</locationX>
+        <locationY>360</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Iterate_over_Project_Records</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>TAG_Stage__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>On Going</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>TAG_Project__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_Automation_Bypass</targetReference>
+        </connector>
+        <schedule>
+            <frequency>Daily</frequency>
+            <startDate>2025-03-03</startDate>
+            <startTime>00:00:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Active</status>
+    <subflows>
+        <description>Use values from the parent flow to set the inputs for the &quot;Subflow: Error&quot; flow. By default, the parent flow stores all outputs. You can either reference outputs via the API name of the Subflow element or manually assign variables in the parent flow to store individual outputs from the &quot;Subflow: Error&quot; flow.</description>
+        <name>CRMF_Subflow_Error</name>
+        <label>Subflow: Error</label>
+        <locationX>314</locationX>
+        <locationY>1068</locationY>
+        <flowName>CRMF_Subflow_Error</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>Iterate_over_Project_Records.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>varFaultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <variables>
+        <name>cerateTask</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Task</objectType>
+    </variables>
+    <variables>
+        <name>singleTask</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Task</objectType>
+    </variables>
+</Flow>

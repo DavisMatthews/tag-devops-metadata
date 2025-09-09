@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>This custom setting houses hard coded ID&apos;s of individual team members so that various areas of the system can reference them centrally and not need to be updated in multiple locations.</description>
+    <enableFeeds>false</enableFeeds>
+    <label>Team Members</label>
+    <visibility>Public</visibility>
+</CustomObject>
