@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VM_4_6_Only_VM_Projects</fullName>
+    <booleanFilter>2 AND (4 OR 5 OR 6) AND (1 OR 3)</booleanFilter>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>TAG_Account_Annual_Revenue__c</columns>
+    <columns>TAG_Stage_Detail__c</columns>
+    <columns>TAG_Buyer__c</columns>
+    <columns>TAG_Project__c</columns>
+    <columns>OPPORTUNITY.NEXT_STEP</columns>
+    <columns>OPPORTUNITY.LAST_ACTIVITY</columns>
+    <columns>CORE.USERS.FULL_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>TAG_Stage_Detail__c</field>
+        <operation>equals</operation>
+        <value>Contact Made - Interest Unknown</value>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Opportunity.TAG_Target_Company</value>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.STAGE_NAME</field>
+        <operation>equals</operation>
+        <value>Introduction,Advanced Lead,In Discussions,Proposal,Negotiation,Offer &amp; Better</value>
+    </filters>
+    <filters>
+        <field>TAG_Project_ID__c</field>
+        <operation>equals</operation>
+        <value>a15an000007Hv4PAAS,a15an000007Hv4SAAS,a15an000007Hv4XAAS,a15an000007Hv4bAAC,a15an000007PzM1AAK,a15an000008UZbdAAG,a15an000008mlKzAAI,a15an0000094KPZAA2,a15an000009HikDAAS,a15an00000AJ7pfAAD</value>
+    </filters>
+    <filters>
+        <field>TAG_Project_ID__c</field>
+        <operation>equals</operation>
+        <value>a15an000007Hv4NAAS,a15an000007Hv4fAAC,a15an00000ALoAYAA1,a15an000007Hv4lAAC,a15an000007Hv4KAAS,a15an000007WJzaAAG</value>
+    </filters>
+    <filters>
+        <field>CORE.USERS.FIRST_NAME</field>
+        <operation>equals</operation>
+        <value>Vince,Davis</value>
+    </filters>
+    <label>VM 4.6 (Only VM Projects)</label>
+    <sharedTo>
+        <group>VM_SH</group>
+    </sharedTo>
+</ListView>

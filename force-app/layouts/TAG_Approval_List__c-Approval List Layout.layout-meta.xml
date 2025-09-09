@@ -3,6 +3,7 @@
     <customButtons>Remail</customButtons>
     <customButtons>Conga_Composer_Approval_List_Doc</customButtons>
     <excludeButtons>ChangeOwnerOne</excludeButtons>
+    <excludeButtons>OpenSlackRecordChannel</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
     <layoutSections>
         <customLabel>false</customLabel>
@@ -139,6 +140,7 @@
         </platformActionListItems>
     </platformActionList>
     <relatedLists>
+        <customButtons>PDF_Butler</customButtons>
         <fields>OPPORTUNITY.NAME</fields>
         <fields>TAG_Priority__c</fields>
         <fields>OPPORTUNITY.STAGE_NAME</fields>

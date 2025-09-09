@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Flip_Deals</fullName>
+    <columns>TAG_Account_Annual_Revenue__c</columns>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>TAG_Peak_Stage_Detail__c</columns>
+    <columns>TAG_Stage_Detail__c</columns>
+    <columns>OPPORTUNITY.LAST_STG_CHG_DAYS</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OPPORTUNITY.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Opportunity.TAG_Target_Company</value>
+    </filters>
+    <filters>
+        <field>TAG_Peak_Stage__c</field>
+        <operation>equals</operation>
+        <value>Introduction,Advanced Lead,Offer &amp; Better</value>
+    </filters>
+    <label>Flip Deals</label>
+</ListView>
