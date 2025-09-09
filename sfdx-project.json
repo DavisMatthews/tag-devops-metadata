@@ -2,11 +2,17 @@
   "packageDirectories": [
     {
       "path": "force-app",
-      "default": true
+      "default": true,
+      "package": "TAG_DevOps_Metadata",
+      "versionName": "ver 0.1",
+      "versionNumber": "0.1.0.NEXT"
     }
   ],
-  "name": "salesforce-prod-backup",
+  "name": "tag-devops-metadata",
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "64.0"
+  "sourceApiVersion": "64.0",
+  "packageAliases": {
+    "TAG_DevOps_Metadata": "0Ho000000000000000"
+  }
 }
